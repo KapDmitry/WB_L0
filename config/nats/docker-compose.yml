@@ -1,0 +1,7 @@
+version: '3'
+services:
+  nats-streaming:
+    image: nats-streaming:latest
+    command: ["--cluster_id", "${CLUSTER_ID}"]
+    ports:
+      - "${PORT_NUMBER}:${PORT_NUMBER}"  # Проброс порта из переменной окружения

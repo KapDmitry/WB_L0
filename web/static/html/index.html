@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GET Request Example</title>
+</head>
+<body>
+
+    <label for="userId">Enter ID:</label>
+    <input type="text" id="userId" />
+    <button type="button" onclick="sendGetRequest()">Send GET Request</button>
+
+    <div id="responseContainer">
+        <!-- JSON response will be displayed here -->
+    </div>
+
+    <script>
+        function sendGetRequest() {
+            const userId = document.getElementById('userId').value;
+            const responseContainer = document.getElementById('responseContainer');
+
+            if (!userId.trim()) {
+                responseContainer.innerHTML = `<p>Please enter a valid ID</p>`;
+                return;
+            }
+
+            // Form the URL with the user-provided ID
+            //const url = `/api/data?id=${userId}`;
+            const url = `/order/${userId}`;
+
+            // Make the GET request using Fetch API
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // Display JSON response on the page
+                    responseContainer.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                })
+                .catch(error => {
+                    // Handle error if the request fails
+                    responseContainer.innerHTML = `<p>Error: ${error.message}</p>`;
+                });
+        }
+    </script>
+
+</body>
+</html>
